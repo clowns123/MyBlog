@@ -32,3 +32,64 @@
 # backend_start
 
 `yarn dev`
+
+# DB modeling
+
+<details>
+
+<summary> 1. user </summary>
+
+| **name**      | **type** | **option**                                   |
+| ------------- | -------- | -------------------------------------------- |
+| name          | String   | required(O)                                  |
+| email         | String   | unique(O)                                    |
+| password      | String   | required(O)                                  |
+| role          | String   | enum[MainJuin, SubJuin, User], default(User) |
+| register_data | Date     | default(Now)                                 |
+| comments      | Array    | ref(posts, comments)                         |
+| posts         | Array    | ref(posts)                                   |
+
+</details>
+
+<details>
+
+<summary> 2. post </summary>
+
+| **name** | **type** | **option**                                            |
+| -------- | -------- | ----------------------------------------------------- |
+| name     | String   | required(O), index(O)                                 |
+| title    | String   | unique(O)                                             |
+| contents | Number   | defalut(-2)                                           |
+| views    | String   | defalut("https://source.unsplash.com/random/301x201") |
+| fileUrl  | Date     | default(Now)                                          |
+| date     | String   | default(Now)                                          |
+| category | Single   | ref(category)                                         |
+| comments | Single   | ref(comment)                                          |
+| creator  | Single   | ref(user)                                             |
+
+</details>
+
+<details>
+
+<summary> 3. comment </summary>
+
+| **name**    | **type** | **option**   |
+| ----------- | -------- | ------------ |
+| contents    | String   | required(O)  |
+| date        | String   | default(Now) |
+| post        | Single   | ref(post)    |
+| creator     | Single   | ref(user)    |
+| creatorName | String   | X            |
+
+</details>
+
+<details>
+
+<summary> 4. category </summary>
+
+| **name**     | **type** | **option**        |
+| ------------ | -------- | ----------------- |
+| categoryName | String   | default("미분류") |
+| posts        | Arrat    | ref(post)         |
+
+</details>
