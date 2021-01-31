@@ -1,0 +1,30 @@
+{
+  "name": "MyBlog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/clowns123/MyBlog.git",
+  "author": "clowns123 <clowns1232@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev" : "nodemon ./server/server.js --exec babel-node"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "hpp": "^0.2.3",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.14"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "morgan": "^1.10.0"
+  }
+}
