@@ -3,9 +3,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../../models/user";
 import config from "../../config";
+import auth from "../../middleware/auth";
 
 const router = express.Router();
 const { JWT_SECRET } = config;
+
 /**
 @router     GET api/user
 @desc       Get all user
@@ -23,7 +25,7 @@ router.get("/", async (req, res) => {
 });
 
 /**
-@router     POST api/user
+@router     POST /api/user
 @desc       Register user
 @access     public
 */

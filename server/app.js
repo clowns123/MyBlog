@@ -31,5 +31,6 @@ mongoose
 app.get("/");
 app.use("/api/post", routers.post);
 app.use("/api/user", routers.user);
+app.use("/api/auth", routers.auth);
 
 export default app;
