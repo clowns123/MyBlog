@@ -1,5 +1,9 @@
 # MyBlog
 
+# Backend
+
+## backend_lib
+
 <details>
 
 <summary>backend_lib</summary>
@@ -36,11 +40,7 @@
 
 </details>
 
-# backend_start
-
-`yarn dev`
-
-# DB modeling
+## DB modeling
 
 <details>
 
@@ -98,5 +98,32 @@
 | ------------ | -------- | ----------------- |
 | categoryName | String   | default("미분류") |
 | posts        | Arrat    | ref(post)         |
+
+</details>
+
+# Frontend
+
+CRA으로 프로젝트 설정
+
+## 폴더 구조
+
+- assets
+- components
+- container
+- redux
+- routers
+- hooks
+
+## 프론트 라이브러리
+
+<details>
+<summary>Front_lib</summary>
+
+- redux, react-redux, redux-actions : 상태관리
+- redux-devtools-extension : 리덕스 크롬 데브툴
+- redux-saga : 비동기 상태 관리
+- redux-router-dom, connected-react-router : 라우터 관리
+- bootstrap, reactstrap : css 프레임워크
+- dotenv : .env 사용
 
 </details>

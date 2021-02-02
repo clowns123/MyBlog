@@ -6,7 +6,7 @@
   "author": "clowns123 <clowns1232@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./server/server.js --exec babel-node"
+    "dev": "nodemon ./server.js --exec babel-node"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
