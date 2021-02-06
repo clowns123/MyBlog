@@ -1,0 +1,15 @@
+#page-header {
+  margin-bottom: 0.4rem;
+  height: 200px;
+  background: url("../image/HeaderImage.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  color: rgb(255, 255, 255);
+  border-bottom: 1px #eee solid;
+  padding-top: 60px;
+
+  p {
+    color: rgb(255, 255, 255);
+  }
+}
