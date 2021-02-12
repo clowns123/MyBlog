@@ -15,11 +15,10 @@ const router = express.Router();
 */
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-
+  // 유효성 검사
   if (!email || !password) {
     return res.status(400).json({ msg: "모든 필드를 채워주세요" });
   }
-
   const checkUser = await User.findOne({ email });
   if (!checkUser) {
     return res.status(400).json({ msg: "유저가 존재하지 않습니다." });
@@ -28,7 +27,16 @@ router.post("/", async (req, res) => {
   if (!checkPass) {
     return res.status(400).json({ msg: "비밀번호가 일치하지 않습니다." });
   }
-  const token = jwt.sign({ id: User.id }, JWT_SECRET, { expiresIn: "2 day" });
+
+  // 토큰 발행
+  const token = jwt.sign(
+    // 1. 토큰 안에 넣고 싶은 데이터
+    { id: User.id },
+    // 2. JWT 암호
+    JWT_SECRET,
+    // 3. 속성
+    { expiresIn: "2d" }
+  );
   res.json({
     token,
     user: {

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import moment from "moment";
 
+import bcrypt from "bcrypt";
+
 // Create Schema
 const UserSchema = new mongoose.Schema({
   name: {
@@ -44,6 +46,20 @@ const UserSchema = new mongoose.Schema({
     },
   ],
 });
+
+UserSchema.methods.setPassword = async function (password) {
+  const hash = await bcrypt.hash(password, 10);
+  this.password = hash;
+};
+
+UserSchema.methods.checkPassword = async function (password) {
+  const res = await bcrypt.compare(password, this.password);
+  return res;
+};
+
+UserSchema.statics.findByName = function (name) {
+  return this.findOne({ name });
+};
 
 const User = mongoose.model("user", UserSchema);
 

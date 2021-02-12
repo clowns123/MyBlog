@@ -3,6 +3,6 @@ import config from "./config";
 
 const { PORT } = config;
 
-app.listen(PORT | 5000, () => {
-  console.log(`Hello Express PORT = ${PORT | 5000}`);
+app.listen(PORT | 4000, () => {
+  console.log(`Hello Express PORT = ${PORT | 4000}`);
 });

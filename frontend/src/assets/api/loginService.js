@@ -1,15 +1,6 @@
 import client from "./client";
 
-// const loginUserAPI = (loginData, token) => {
-//   console.log(loginData, "loginData");
-//   const config = {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-// };
-
-export const loginUserApi = (loginData, token) => {
+export const login = (loginData, token) => {
   console.log(loginData, "loginData");
   const config = {
     headers: {

@@ -1,4 +1,4 @@
-import { createAction, handleAction, handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 
 const URL = "loading";
 const START_LOADING = `${URL}/START_LOADING`;
@@ -16,7 +16,7 @@ export const finishLoading = createAction(
 
 const initialState = {};
 
-const loading = handleAction(
+const loading = handleActions(
   {
     [START_LOADING]: (state, action) => ({ ...state, [action.payload]: true }),
     [FINISH_LOADING]: (state, action) => ({
