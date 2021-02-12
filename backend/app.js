@@ -8,6 +8,7 @@ import config from "./config";
 
 //Routes
 import routers from "./routers/index";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const { MONGO_URI } = config;
@@ -17,6 +18,7 @@ app.use(helmet());
 app.use(cors({ origin: true, credentials: true }));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cookieParser());
 
 mongoose
   .connect(MONGO_URI, {

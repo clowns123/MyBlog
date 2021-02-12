@@ -36,31 +36,34 @@ router.post("/", async (req, res) => {
     res.status(400).json({ msg: "모든 필드를 채워주세요" });
   }
 
-  const userCheck = await User.findOne({ email });
+  const userCheck = await User.findByEmail(email);
   if (userCheck) {
     return res.status(400).json({ msg: "이미 가입된 유저가 존재합니다." });
   }
 
-  const user = new User({
-    name,
-    email,
-    password,
-  });
+  const nameCheck = await User.findByName(name);
+  if (nameCheck) {
+    return res.status(400).json({ msg: "닉네임이 중복됩니다." });
+  }
 
   try {
-    const salt = await bcrypt.genSalt(10);
-    const passHash = await bcrypt.hash(user.password, salt);
-    user.password = passHash;
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: 3600,
+    const user = new User({
+      name,
+      email,
     });
-    const checkUser = await user.save();
-    res.json({
-      token,
-      user: { id: checkUser.id, name: checkUser.name, email: checkUser.email },
+    await user.setPassword(password);
+    await user.save();
+
+    const token = user.getToken();
+    res.cookie("token", token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7dlf
+      httpOnly: true,
     });
+    res.json(user.serialize());
   } catch (e) {
-    return res.status(400).json({ msg: "가입 도중 문제가 생겼습니다." });
+    return res
+      .status(400)
+      .json({ msg: "가입 도중 문제가 생겼습니다.", context: e });
   }
 });
 

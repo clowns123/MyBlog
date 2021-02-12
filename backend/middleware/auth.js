@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 import config from "../config/index";
 const { JWT_SECRET } = config;
 
-const auth = (req, res, next) => {
-  const token = req.headers.authorization.split("Bearer ")[1];
+const auth = async (req, res, next) => {
+  const token = req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ mas: "토큰이 없습니다." });
@@ -11,7 +11,18 @@ const auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
+
+    req.user = { id: decoded.id, name: decoded.name };
+    // 유효기간이 지났으면 재발급
+    const now = Math.floor(Date.now() / 1000);
+    if (decoded.exp - now < 60 * 60 * 24 * 3.5) {
+      const user = await User.findByName(decoded.name);
+      const token = user.getToken();
+      res.cookie("token", token, {
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
+        httpOnly: true,
+      });
+    }
     next();
   } catch (e) {
     console.log(e);
